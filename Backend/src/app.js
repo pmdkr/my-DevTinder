@@ -1,6 +1,7 @@
-const express = require('express');
 
-const app = express();
+const { adminAuth } = require('./middleware/adminAuth');
+require('./config/database');
+
 
 // app.use matches all type of request and execute route handlers.
 // when app.get only match the GET request
@@ -20,20 +21,55 @@ const app = express();
 //     res.send("Hello from the server");
 // })
 
-app.use("/user", (req, res) => {
+// 
+// app.get only handle the GET request
+// app.get("/user", (req,res,next)=>{
+//     console.log("app .get method api is hit ........")
+//     res.send("get method is called"
 
-    console.log("Handling the route handler 1");
-    // res.send("Resposne 1");
-},
-    (req, res) => {
-        console.log("Handling the request of route handler 2");
-        res.send("Response 2");
+//     )
+// })
 
 
-    })
+// app.use("/admin/getAllData", adminAuth, (req, res) => {
 
-app.listen(3000, () => {
+//     console.log("get all data routes is handled at this request")
+//     res.send("Sent all user data");
 
-    console.log("Server is started at port 3000....");
 
-});
+
+// })
+
+// app.use("/user/deleteData", (req, res, next) => {
+
+
+// })
+
+
+// app.use matches all type of request and execute route handlers.
+// when app.get only match the GET request
+
+
+
+// app.use("/test", (req, res) => {
+//     res.send("Hello hello hello");
+// })
+
+// app.use("/browse", (req, res) => {
+//     res.send("Hello from browse page");
+// })
+
+
+// app.use("/", (req, res) => {
+//     res.send("Hello from the server");
+// })
+
+// 
+// app.get only handle the GET request
+// app.get("/user", (req,res,next)=>{
+//     console.log("app .get method api is hit ........")
+//     res.send("get method is called"
+
+//     )
+// })
+
