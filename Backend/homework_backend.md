@@ -1,4 +1,4 @@
-#Dev Tinder Backend Homework: 
+# Dev Tinder Backend Homework: 
 - Create a repository
 - Initialize the repository
 - node_modules, package.json, package-lock.json
@@ -64,6 +64,21 @@
 - Explore the Mongoose documentation for UserModel API
 - What are the options in a Model.findOneAndUpdate method, explore more about it
 - API - Update the user with email ID
+
+
+- Explore schematype option from the documentation
+- add required , uinque, lowercase, min, trim,maxLength
+- Add default
+- Create a custiom validate function for gender
+- Improve the DB schema- PUT all appropirate validations on each field in Schema
+- add timestamps to the User
+- Add API -level validation on PATCH request & signup POST API
+- DATA sanitizing - add API validation for each field
+- install validator NPM package
+- Explore validator library function and use validator function for password, email & PhotoURL
+- NEVER trust req.body
+
+
 
 
 

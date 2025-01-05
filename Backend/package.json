@@ -15,7 +15,9 @@
   "author": "Pramod Lohra",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "devtinder-backend": "file:",
+    "dotenv": "^16.4.7",
     "express": "^4.21.0",
     "mongodb": "^6.11.0",
     "mongoose": "^8.8.4",
