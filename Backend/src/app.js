@@ -3,28 +3,49 @@ const app = express();
 const { adminAuth } = require('./middleware/adminAuth');
 const connectDB = require('./config/database');
 const User = require("./models/User");
+const validator = require('validator');
+const { validateSignUpData } = require('./utils/validation.js');
+const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 
 //middleware that converts json request to js object
 app.use(express.json());
+app.use(cookieParser());
 
 app.post("/signup", async (req, res) => {
     console.log(req.body);
-    const userObj = req.body;
+    const { firstName, lastName, email } = req.body;
+    const { password } = req.body;
     // const userObj = {
     //     firstName: 'Pramod',
     //     lastName: 'Lohra',
     //     email: 'pramodkrlohra@gmail.com',
     //     password: 'Pramod@123'
     // }
-    // //creating a new instance of User model
-    // const user = new User(userObj);
-    const user = new User(userObj);
+
+
+
+
     try {
+        // validation of data
+        validateSignUpData(req);
+
+        //Enccypt the password
+        const passwordHash = await bcrypt.hash(password, 10);
+
+
+        //creating a new instance of User model
+        const user = new User({
+            firstName,
+            lastName,
+            email,
+            password: passwordHash
+        });
         await user.save();
-        res.send("user added successfuly!");
+        res.status(201).send("user added successfuly!");
 
     } catch (err) {
-        res.status(400).send(err);
+        res.status(400).send("ERROR: " + err.message);
 
     }
     //  await user.save();
@@ -88,7 +109,7 @@ app.delete("/delete", async (req, res) => {
 app.patch("/user", async (req, res) => {
     const userId = req.body.userId;
     const data = req.body;
-    console.log(data);
+    //console.log(data);
 
     try {
         const user = await User.findByIdAndUpdate(userId, data, {
@@ -103,6 +124,44 @@ app.patch("/user", async (req, res) => {
     }
 })
 
+app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    const passwordHash = await bcrypt.hash(password, 10);
+
+
+    try {
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            throw new Error("Invalid credentials");
+        }
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (isPasswordValid) {
+
+            //create a JWT token
+
+            //send the token to cookie and send as response to the broser(user)
+            res.cookie("token", "jfldflajsljdlajdllllkldjlfjljflsdjaljljlkjdlfjdf");
+
+            res.send(`Login is successfull and user name is :  ${user.firstName}`);
+
+        } else {
+            throw new Error("Invalid credentials, Please check your credentials");
+        }
+
+
+    } catch (err) {
+        res.status(400).send("ERROR" + err.message);
+    }
+});
+
+app.get("/profile", async (req, res) => {
+
+
+    const cookie = req.cookies;
+    console.log(cookie);
+    res.send("Reading the cookie");
+
+});
 
 
 connectDB().then(() => {
