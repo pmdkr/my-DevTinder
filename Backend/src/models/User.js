@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -53,6 +55,29 @@ const userSchema = new mongoose.Schema({
         default: ["JavaScript", "python", "HTML", "CSS"],
     }
 })
+
+// Schema leeval methods,=> offloads the task that closed to the user/schema
+// here every user has uniqe own jwt token . so we can add this to schema level method
+
+
+userSchema.methods.getJWT = async function () {
+    // here THIS refers to the current user instance
+    const user = this;
+    const token = await jwt.sign({ _id: user._id }, "DevTinder@321", { expiresIn: '1h' });
+    return token;
+
+}
+
+userSchema.methods.validatePassword = async function (passwordInputByUser) {
+    // here THIS refers to the current user instance
+    const user = this;
+    const passwordHash = user.password;
+    const isPasswordValid = await bcrypt.compare(
+        passwordInputByUser,
+        passwordHash);
+    return isPasswordValid;
+
+}
 
 const userModel = mongoose.model("User", userSchema);
 module.exports = userModel;

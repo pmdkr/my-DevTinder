@@ -137,11 +137,12 @@ app.post("/login", async (req, res) => {
         if (!user) {
             throw new Error("Invalid credentials");
         }
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await user.validatePassword(password);
+
         if (isPasswordValid) {
 
             //create a JWT token
-            const token = jwt.sign({ _id: user._id }, "DevTinder@321",{ expiresIn: '1h' });
+            const token = await user.getJWT();
 
             //send the token to cookie and send as response to the broser(user)
             res.cookie("token", token);
@@ -175,7 +176,7 @@ app.get("/profile", userAuth, async (req, res) => {
 });
 
 //POST send a connection request to other user
-app.post("/sendConnectionRequest",userAuth, async(req,res)=>{
+app.post("/sendConnectionRequest", userAuth, async (req, res) => {
     res.send("Connection request sent!");
 })
 
