@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const { adminAuth } = require('./middleware/adminAuth');
+const { userAuth } = require('./middleware/userAuth.js');
 const connectDB = require('./config/database');
 const User = require("./models/User");
 const validator = require('validator');
 const { validateSignUpData } = require('./utils/validation.js');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 //middleware that converts json request to js object
 app.use(express.json());
@@ -124,6 +126,7 @@ app.patch("/user", async (req, res) => {
     }
 })
 
+//Login API
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
     const passwordHash = await bcrypt.hash(password, 10);
@@ -138,9 +141,10 @@ app.post("/login", async (req, res) => {
         if (isPasswordValid) {
 
             //create a JWT token
+            const token = jwt.sign({ _id: user._id }, "DevTinder@321",{ expiresIn: '1h' });
 
             //send the token to cookie and send as response to the broser(user)
-            res.cookie("token", "jfldflajsljdlajdllllkldjlfjljflsdjaljljlkjdlfjdf");
+            res.cookie("token", token);
 
             res.send(`Login is successfull and user name is :  ${user.firstName}`);
 
@@ -154,16 +158,28 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.get("/profile", async (req, res) => {
+//GET user profile using cookie stored after login
+app.get("/profile", userAuth, async (req, res) => {
 
+    try {
+        const user = req.user;
+        if (!user) {
+            console.log("user is not found at DB");
+        }
+        res.status(200).send("Reading the cookie" + ' ' + user.firstName);
 
-    const cookie = req.cookies;
-    console.log(cookie);
-    res.send("Reading the cookie");
+    } catch (err) {
+        res.status(400).send("ERROR: " + err.message);
 
+    }
 });
 
+//POST send a connection request to other user
+app.post("/sendConnectionRequest",userAuth, async(req,res)=>{
+    res.send("Connection request sent!");
+})
 
+//connction to the DB...
 connectDB().then(() => {
     console.log('Database connected successfuly...');
     app.listen(3000, () => {
@@ -174,6 +190,7 @@ connectDB().then(() => {
 }).catch(err => {
     console.log("database is not connected...", err);
 })
+
 
 
 // app.use matches all type of request and execute route handlers.

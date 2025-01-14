@@ -1,4 +1,5 @@
-# Dev Tinder Backend Homework: 
+# Dev Tinder Backend Homework:
+
 - Create a repository
 - Initialize the repository
 - node_modules, package.json, package-lock.json
@@ -11,23 +12,18 @@
 - What is the use of "-g" while npm install
 - Diffrence between caret and tilde ( ^ vs ~)
 
-
-
 - initialize git
 - gitignore
 - Create a remote repo on github
 - Push all code to remote origin
 - Play with routes extensions ex /hello, /hello/2, /xyz
-- Order of routes matter a  lots
+- Order of routes matter a lots
 - Install Postman app and make workspace/collection >test API call
 - Write logic to handle GET, POST, PATCH, DELETE API Calls and test them on Postman
-- Explore routing and use of ?, +, (), * in the routes
+- Explore routing and use of ?, +, (), \* in the routes
 - use of regex in routes /a/, /.efly$
 - Reading the query parmas in the routes
-- Reading the dyamic routes 
-
-
-
+- Reading the dyamic routes
 
 - Multiple route handlers - play with code
 - next()
@@ -39,7 +35,6 @@
 - Write a dummy auth middleware for all users routes, except /user/login
 - Error Handling using app.use("/",(err, req, res,next)={});
 
-
 - Create a free cluster on MongoDB offical website (MongoDB Atlas)
 - Install mongoose library
 - Connect your application to the Database "connection-url"/devTinder"
@@ -48,8 +43,6 @@
 - Create POST /sign API to add data to database
 - Push some documents using API calls from Postman
 - Error Handling using try, catch
-
-
 
 - JS object vs JSON (Diffrence)
 - Add the express.json middleware to tour app
@@ -64,7 +57,6 @@
 - Explore the Mongoose documentation for UserModel API
 - What are the options in a Model.findOneAndUpdate method, explore more about it
 - API - Update the user with email ID
-
 
 - Explore schematype option from the documentation
 - add required , uinque, lowercase, min, trim,maxLength
@@ -84,7 +76,12 @@
 - Create Login API
 - Compare passwords and throw error if email or password is invalid
 
-
-
-
-
+- Install cookie-parser
+- Just send a dumy cookie to the user
+- Create a GET /profile API and check if you get cookie back
+- Install jwtwebtoken
+- In login API, after email and password validation, create a JWT token and send back to the user
+- Read the cookie inside your Profile API & find logged user
+- userAuth middleware
+- Add the userAuth middleware in profile API and a new sendConnectionRequest API
+- Set the expiry of jwt token and cookies for 7 days
