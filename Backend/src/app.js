@@ -26,7 +26,7 @@ app.use('/', requestRouter);
 
 //connction to the DB...
 connectDB().then(() => {
-    console.log('Database connected successfuly...');
+    console.log('Database connected successfully...');
     app.listen(3000, () => {
 
         console.log("Server is started at port 3000....");

@@ -1,10 +1,10 @@
 
 const express = require('express');
 const authRouter = express.Router();
-const User=require('../models/User');
-const bcrypt=require('bcrypt');
-const jwt=require('jsonwebtoken');
-const {userAuth}=require('../middleware/userAuth.js');
+const User = require('../models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { userAuth } = require('../middleware/userAuth.js');
 const { validateSignUpData } = require('../utils/validation.js');
 
 //Login API
@@ -28,7 +28,7 @@ authRouter.post("/login", async (req, res) => {
             //send the token to cookie and send as response to the broser(user)
             res.cookie("token", token);
 
-            res.send(`Login is successfull and user name is :  ${user.firstName}`);
+            res.send(`Login successful and user name is :  ${user.firstName}`);
 
         } else {
             throw new Error("Invalid credentials, Please check your credentials");
@@ -82,5 +82,15 @@ authRouter.post("/signup", async (req, res) => {
     //  await user.save();
     // res.send("user signup successfuly!");
 });
+
+//Logout API
+authRouter.post('/logout', async (req, res) => {
+
+    res.cookie("token",
+        null,
+        { expires: new Date(Date.now()) }
+    )
+    res.send("Logout successful")
+})
 
 module.exports = authRouter;
