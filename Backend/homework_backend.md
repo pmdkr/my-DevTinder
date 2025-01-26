@@ -89,3 +89,16 @@
 - (Refactoring the code ) Add Schema leval methods that
 - Craete userSchema methods to getJWT()
 - Create userSchema methods to comapre password validatePassword(passowrd);
+
+- Explore Tinder APIs
+- Create a list of API , can be in DevTinder App
+- Group multiple routes under respective routers
+- Read documentation for express.Router()
+- Create route folder for mananging auth, profile & request routers
+- Create authRouters, profileRouters and requetRouters
+- Import these Routers in app.js
+- Create POST /logout API
+- Create PATCH /profile/edit 
+- Create PATCH /profile/password API => forgot password API
+- Make you validate all data en every POST PATCH APIs
+  

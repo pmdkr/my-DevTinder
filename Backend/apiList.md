@@ -8,11 +8,11 @@
 - PATCH /profile/edit
 - PATCH /profile/password  //forgot password
 
-- POST /request/send/interested/:userId
-- POST /request/send/ignore/:userId
+- POST /request/send/status/:userId          //intersted
+- POST /request/send/status/:userId          //ignored
 
-- POST /request/review/accepted/:requestedId
-  -POST /requested/review/rejected/:requestId
+- POST /request/review/:status/:requestedId => accepted
+  -POST /request/review/:status/:requestId  => rejected
 
 - GET /connections
 - GET /request/recived
