@@ -6,7 +6,7 @@ const User = require('../models/User.js');
 
 
 //POST send a connection request to other user
-requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res) => {
+requestRouter.post('/request/send/:status/:toUserId', userAuth, async (req, res) => {
     try {
         const fromUserId = req.user._id;
         const toUserId = req.params.toUserId;
@@ -63,7 +63,7 @@ requestRouter.post("/request/send/:status/:toUserId", userAuth, async (req, res)
 });
 
 //POST review the connection request recived from others user
-requestRouter("/review/recived/:status/:requestId", userAuth, async (req, res) => {
+requestRouter.post("/review/recived/:status/:requestId", userAuth, async (req, res) => {
 
     try {
 

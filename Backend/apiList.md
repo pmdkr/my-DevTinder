@@ -12,10 +12,11 @@
 - POST /request/send/status/:userId          //ignored
 
 - POST /request/review/:status/:requestedId => accepted
-  -POST /request/review/:status/:requestId  => rejected
+- POST /request/review/:status/:requestId  => rejected
 
+
+- GET /user/request/recived
 - GET /connections
-- GET /request/recived
 - GET /feed - Gets you the profiles of other users on platform
 
-Status: ignore, interested, accepted, rejected
+- Status: ignored, interested, accepted, rejected
