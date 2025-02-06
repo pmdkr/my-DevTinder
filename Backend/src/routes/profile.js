@@ -11,7 +11,7 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
         if (!user) {
             console.log("user is not found at DB");
         }
-        res.status(200).send("Reading the cookie" + ' ' + user.firstName);
+        res.status(200).send("Logged In user : " + ' ' + user.firstName);
 
     } catch (err) {
         res.status(400).send("ERROR: " + err.message);

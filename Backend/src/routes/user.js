@@ -57,6 +57,59 @@ userRouter.get('/user/request/connctions', userAuth, async (req, res) => {
     }
 });
 
+// API- GET /feed 
+userRouter.get("/feed", userAuth, async (req, res) => {
+    try {
+
+        /**
+         * user should be see all conncetions except:
+         * 0. his own card
+         * 1. his connections
+         * 2. ignored people
+         * 3.already sent the connections request
+         * 
+         */
+        const loggedUser = req.user;
+        const page = parseInt(req.query.page);
+        let limit = parseInt(req.query.limit);
+        const skip = (page - 1) * limit;
+
+        limit = limit > 50 ? 50 : limit;
+
+        //Find all connections requests (sent + recived)
+        const connectionRequests = await ConnectionRequestModel.find({
+            $or: [
+                { fromUserId: loggedUser._id },
+                { toUserId: loggedUser._id }
+            ]
+        }).select("fromUserId toUserId");
+
+        // will use Set , set will contain only unique value
+        const hideUserFromFeed = new Set();
+        connectionRequests.forEach(req => {
+            hideUserFromFeed.add(req.fromUserId.toString());
+            hideUserFromFeed.add(req.toUserId.toString());
+        });
+        const users = await User.find({
+            $and: [
+                { _id: { $nin: Array.from(hideUserFromFeed) } },
+                { _id: { $ne: loggedUser._id } }
+            ]
+
+        })
+            .select(USER_DATA_SAFE)
+            .skip(skip)
+            .limit(limit);
+
+        res.json({ data: users });
+
+
+    } catch (err) {
+        res.status(400).send("ERROR" + err.message);
+
+    }
+})
+
 module.exports = userRouter;
 
 

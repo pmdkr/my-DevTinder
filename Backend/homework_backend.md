@@ -101,4 +101,29 @@
 - Create PATCH /profile/edit 
 - Create PATCH /profile/password API => forgot password API
 - Make you validate all data en every POST PATCH APIs
+
+- Create Connection Request Schema
+- API - send connection request
+- Proper validation of data 
+- Think about all corner cases
+- $or query $and query in mongoose - https://www.mongodb.com/docs/manual/reference/operator/query/or/
+
+- always think about corner cases
+
+- Write code with porper validation for POST /request/review/:status/:requestId
+- Thought process -POST vs GET
+- Read about ref & populate 
+- Create GET /user/request/recived with all the checks
+- Create GET /user/connections
+
+
+- Logic for GET /feed API
+- Explore the $nin ,$and ,$ne and other logical query operators
+
+- # Notes
+ pagination:
+ skip(0)&limti(10)=> 0-10 => 10
+ skip(1)&limit(10) =>11-20 => 10
+
+
   
