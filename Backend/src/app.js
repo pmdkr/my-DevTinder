@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+var cors = require('cors');
 const { adminAuth } = require('./middleware/adminAuth');
 const { userAuth } = require('./middleware/userAuth.js');
 const connectDB = require('./config/database');
@@ -13,6 +14,8 @@ const jwt = require('jsonwebtoken');
 //middleware that converts json request to js object
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(cors());
 
 const authRouter = require('./routes/auth.js');
 const profileRouter = require('./routes/profile.js');

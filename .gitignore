@@ -1,6 +1,6 @@
 /Backend/node_modules
-/Frontend/node_modules
+/devtinder-web/node_modules
 
 /Backend/.env
-/Frontend/.env
+/devtinder-web/.env
 .env
