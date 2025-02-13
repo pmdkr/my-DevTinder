@@ -11,11 +11,15 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
+
 //middleware that converts json request to js object
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5174",
+    credentials: true,
+}));
 
 const authRouter = require('./routes/auth.js');
 const profileRouter = require('./routes/profile.js');
