@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 // import 'dotenv/config'
 
 
@@ -17,15 +18,15 @@ const Login = () => {
     console.log(BaseURL);
     const handleLoginClick = async () => {
         try {
-            const res = await axios.post("http://localhost:3000/login", {
+            const res = await axios.post(BASE_URL+"/login", {
                 email, password
             }, {
                 withCredentials: true,
             });
             const resData = await res.data;
-            // console.log(resData.data);
+            console.log(resData.data);
             dispatch(addUser(resData.data));
-            return navigate("/feed");
+            return navigate("/");
 
 
         } catch (err) {

@@ -1,7 +1,7 @@
 const express = require('express');
 const profileRouter = express.Router();
 const { userAuth } = require('../middleware/userAuth.js');
-const {validateProfileUpdateData}=require('../utils/validation.js');
+const { validateProfileUpdateData } = require('../utils/validation.js');
 
 //GET user profile using cookie stored after login
 profileRouter.get("/profile/view", userAuth, async (req, res) => {
@@ -11,17 +11,21 @@ profileRouter.get("/profile/view", userAuth, async (req, res) => {
         if (!user) {
             console.log("user is not found at DB");
         }
-        res.status(200).send("Logged In user : " + ' ' + user.firstName);
+        res.status(200).json({
+            message: "Logged In user : " + ' ' + user.firstName,
+            data: user,
+
+        });
 
     } catch (err) {
-        res.status(400).send("ERROR: " + err.message);
+        res.status(401).send("ERROR: " + err.message);
 
     }
 });
 
 
 // PATCH update API for user
-profileRouter.patch('/profile/edit',userAuth, async (req, res) => {
+profileRouter.patch('/profile/edit', userAuth, async (req, res) => {
 
 
     try {
@@ -32,10 +36,10 @@ profileRouter.patch('/profile/edit',userAuth, async (req, res) => {
         const loggedUser = req.user;
         Object.keys(req.body).forEach((key) => (loggedUser[key] = req.body[key]));
         await loggedUser.save();
-        
+
         res.json({
-            message:`${loggedUser.firstName} ,your profile Updated successfuly.`,
-            data:loggedUser,
+            message: `${loggedUser.firstName} ,your profile Updated successfuly.`,
+            data: loggedUser,
 
         })
 
