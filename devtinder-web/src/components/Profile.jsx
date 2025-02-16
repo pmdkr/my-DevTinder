@@ -103,13 +103,9 @@ const Profile = () => {
                             <div className="label">
                                 <span className="label-text">About</span>
                             </div>
-                            <input
-                                type="text"
-                                value={about}
-                                placeholder="Enter your password"
-                                className="input input-bordered w-full max-w-xs"
-                                onChange={(e) => setAbout(e.target.value)}
-                            />
+                            <textarea className="textarea textarea-bordered"
+                                placeholder="Bio"
+                                onChange={(e) => setAbout(e.target.value)}></textarea>
                         </label>
                         <label className="form-control w-full max-w-xs">
                             <div className="label">

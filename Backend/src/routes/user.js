@@ -29,7 +29,7 @@ userRouter.get("/user/request/recived", userAuth, async (req, res) => {
 });
 
 //GET all connections of logged user
-userRouter.get('/user/request/connctions', userAuth, async (req, res) => {
+userRouter.get('/user/request/connections', userAuth, async (req, res) => {
 
     try {
         const loggedUser = req.user;
