@@ -10,8 +10,8 @@ const Profile = () => {
 
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
-    const [age, setAge] = useState(user.age);
-    const [gender, setGender] = useState(user.gender);
+    const [age, setAge] = useState(user.age || "");
+    const [gender, setGender] = useState(user.gender || "");
     const [photoURL, setPhotoURL] = useState(user.photoURL);
     const [about, setAbout] = useState(user.about);
 
@@ -46,9 +46,9 @@ const Profile = () => {
 
 
     return (
-        <div className="flex my-20 justify-between mx-10">
-            <div className="flex justify-center items-center flex-grow">
-                <div className="card bg-base-300 w-96 shadow-xl">
+        <div className="flex my-20 justify-center">
+            <div className="mx-10">
+                <div className="card bg-base-300 w-80 shadow-xl">
                     <div className="card-body">
                         <h2 className="card-title flex justify-center">User Profile</h2>
                         <label className="form-control w-full max-w-xs">
@@ -104,6 +104,7 @@ const Profile = () => {
                                 <span className="label-text">About</span>
                             </div>
                             <textarea className="textarea textarea-bordered"
+                                value={about}
                                 placeholder="Bio"
                                 onChange={(e) => setAbout(e.target.value)}></textarea>
                         </label>
@@ -126,13 +127,17 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <UserCard user={{ firstName, lastName, age, gender, about, photoURL }} />
-            {savedData && <div className="toast toast-top toast-start">
+            <div className="mx-10">
+                <UserCard user={{ firstName, lastName, age, gender, about, photoURL }} />
+                {savedData && <div className="toast toast-top toast-start">
 
-                <div className="alert alert-success">
-                    <span>Profile saved successfully.</span>
-                </div>
-            </div>}
+                    <div className="alert alert-success">
+                        <span>Profile saved successfully.</span>
+                    </div>
+                </div>}
+
+            </div>
+
         </div>
     )
 }

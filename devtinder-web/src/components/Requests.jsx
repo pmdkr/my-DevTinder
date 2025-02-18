@@ -65,7 +65,7 @@ const Requests = () => {
                             </div>
                             <div className="text-left mx-4">
                                 <h2>{firstName + " " + lastName}</h2>
-                                <p>{age + ", " + gender}</p>
+                                {age && gender && <p>{age + ", " + gender}</p>}
                                 <p>{about}</p>
 
                             </div>

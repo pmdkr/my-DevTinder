@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
-import { removeFeed } from "../utils/feedSlice";
+// import { removeUserFromFeed } from "../utils/feedSlice";
 import { setTheme } from "../utils/themeSlice";
 
 const Navbar = () => {
@@ -18,7 +18,7 @@ const Navbar = () => {
     try {
       await axios.post(BASE_URL + "/logout");
       dispatch(removeUser());
-      dispatch(removeFeed());
+      // dispatch(removeFeed());
       navigate("/login");
     } catch (err) {
       if (err.status === 400) {
@@ -51,7 +51,7 @@ const Navbar = () => {
             >
               <option value="dark">Dark</option>
               <option value="light">Light</option>
-              <option value="cupcake">Cupcake</option>
+              <option value="business">business</option>
             </select>
           </label>
         </div>

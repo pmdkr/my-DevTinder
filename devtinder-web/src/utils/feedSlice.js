@@ -5,11 +5,13 @@ const feedSlice = createSlice({
     initialState: null,
     reducers: {
         addFeed: (state, action) => action.payload,
-        // eslint-disable-next-line no-unused-vars
-        removeFeed: (state, action) => null,
+        removeUserFromFeed: (state, action) => {
+            const newArray = state.filter((r) => r._id !== action.payload);
+            return newArray;
+        },
     }
 })
 
 
 export default feedSlice.reducer;
-export const { addFeed, removeFeed } = feedSlice.actions;
+export const { addFeed, removeUserFromFeed } = feedSlice.actions;

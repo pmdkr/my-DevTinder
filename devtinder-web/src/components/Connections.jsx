@@ -18,9 +18,6 @@ const Connections = () => {
             console.log(err);
 
         }
-
-
-
     }
 
     useEffect(() => {
@@ -38,7 +35,7 @@ const Connections = () => {
                 connections.map((connection) => {
                     const { _id, firstName, lastName, age, gender, about, photoURL } = connection;
                     return (
-                        <div key={_id} className=" flex p-4 rounded-lg bg-base-300 m-auto w-1/2">
+                        <div key={_id} className=" flex p-4 rounded-lg bg-base-300 m-auto w-1/2 my-2">
                             <div>
                                 <img
                                     alt="photo"
@@ -48,7 +45,7 @@ const Connections = () => {
                             </div>
                             <div className="text-left mx-4">
                                 <h2>{firstName + " " + lastName}</h2>
-                                <p>{age + ", " + gender}</p>
+                                {age && gender && <p>{age + ", " + gender}</p>}
                                 <p>{about}</p>
 
                             </div>
