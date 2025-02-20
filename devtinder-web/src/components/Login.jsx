@@ -46,6 +46,7 @@ const Login = () => {
                 { firstName, lastName, email, password },
                 { withCredentials: true });
             dispatch(addUser(res.data.data));
+            
             navigate("/profile");
 
         } catch (err) {
@@ -113,7 +114,7 @@ const Login = () => {
                     <div className="card-actions justify-center">
                         <button className="btn btn-primary" onClick={isLoginForm ? handleLoginClick : handleSignUpClick}>{isLoginForm ? "Login" : "Signup"}</button>
                     </div>
-                    <p className="m-auto cursor-pointer" onClick={() => setIsLoginForm((value) => !value)}>{isLoginForm ? "New User? Please SignUp Here" : "Registerd User? Login Here"}</p>
+                    <p className="m-auto cursor-pointer" onClick={() => setIsLoginForm((value) => !value)}>{isLoginForm ? "New User? Please SignUp" : "Registered User? Login now"}</p>
                 </div>
             </div>
         </div >

@@ -8,8 +8,8 @@ import UserCard from "./UserCard";
 const Profile = () => {
     const user = useSelector((store) => store?.user);
 
-    const [firstName, setFirstName] = useState(user.firstName);
-    const [lastName, setLastName] = useState(user.lastName);
+    const [firstName, setFirstName] = useState(user.firstName || "");
+    const [lastName, setLastName] = useState(user.lastName || "");
     const [age, setAge] = useState(user.age || "");
     const [gender, setGender] = useState(user.gender || "");
     const [photoURL, setPhotoURL] = useState(user.photoURL);

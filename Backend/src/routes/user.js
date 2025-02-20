@@ -32,6 +32,7 @@ userRouter.get("/user/request/recived", userAuth, async (req, res) => {
 userRouter.get('/user/request/connections', userAuth, async (req, res) => {
 
     try {
+        
         const loggedUser = req.user;
         const connectionRequest = await ConnectionRequestModel.find({
             $or: [
@@ -66,7 +67,7 @@ userRouter.get("/feed", userAuth, async (req, res) => {
          * 0. his own card
          * 1. his connections
          * 2. ignored people
-         * 3.already sent the connections request
+         * 3. already sent the connections request
          * 
          */
         const loggedUser = req.user;

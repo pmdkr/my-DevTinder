@@ -13,6 +13,7 @@ const userAuth = async (req, res, next) => {
         }
         const decodedMessage = jwt.verify(token, "DevTinder@321");
         const { _id } = decodedMessage;
+        
         const user = await User.findById(_id);
         if (!user) {
             throw new Error("User is not present at DB");
