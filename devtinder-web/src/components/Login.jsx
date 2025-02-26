@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
-// import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../utils/constants";
 // import 'dotenv/config'
 
 
@@ -17,7 +17,6 @@ const Login = () => {
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const BASE_URL = import.meta.env.VITE_BASE_URL;
     // console.log(BaseURL);
     const handleLoginClick = async () => {
         try {

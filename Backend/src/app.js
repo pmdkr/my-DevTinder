@@ -1,26 +1,19 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-var cors = require('cors');
-const { adminAuth } = require('./middleware/adminAuth');
-const { userAuth } = require('./middleware/userAuth.js');
-const connectDB = require('./config/database');
-const User = require("./models/User");
-const validator = require('validator');
-
-const bcrypt = require('bcrypt');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
+const connectDB = require('./config/database');
 
-
-//middleware that converts json request to js object
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
-
 app.use(cors({
     origin: process.env.ORIGIN_URL,
     credentials: true,
 }));
 
+// Routes
 const authRouter = require('./routes/auth.js');
 const profileRouter = require('./routes/profile.js');
 const requestRouter = require('./routes/request.js');
@@ -31,16 +24,13 @@ app.use('/', profileRouter);
 app.use('/', requestRouter);
 app.use('/', userRouter);
 
-
-
-//connction to the DB...
+// Connect to the database and start the server
 connectDB().then(() => {
     console.log('Database connected successfully...');
-    app.listen(3001, () => {
-
-        console.log("Server is started at port 3001....");
-
+    const PORT = process.env.PORT || 3001;
+    app.listen(PORT, () => {
+        console.log(`Server is started at port ${PORT}...`);
     });
 }).catch(err => {
-    console.log("database is not connected...", err);
+    console.error("Database connection failed:", err);
 });
